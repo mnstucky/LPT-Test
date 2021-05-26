@@ -1,27 +1,36 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+
+const router = express.Router();
 
 /* Setup MySQL connection */
-var mysql = require('mysql');
-var connection = mysql.createConnection({
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
   database: 'lpt',
 });
 
+// Form of data is array of objects:
+//  RowDataPacket {
+//    trace_id: 50,
+//    trace_data: ...
+//    trace_time: 2019-01-17T15:30:08.000Z
+// }
+
 /* GET request for blob data. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   connection.connect();
-  connection.query('SELECT * FROM test', function (error, results, fields) {
+  connection.query('SELECT * FROM test', (error, results, fields) => {
     if (error) {
       throw error;
     } else {
-      res.render('index', { title: 'Express' });
+      console.log(results);
+      res.send('Api route called');
     }
   });
   connection.end();
-  res.send('respond with a resource');
 });
 
 module.exports = router;
