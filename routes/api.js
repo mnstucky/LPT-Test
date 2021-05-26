@@ -26,8 +26,7 @@ router.get('/', (req, res, next) => {
     if (error) {
       throw error;
     } else {
-      console.log(results);
-      res.send('Api route called');
+      res.send(JSON.stringify(results));
     }
   });
   connection.end();
