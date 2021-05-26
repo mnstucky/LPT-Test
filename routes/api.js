@@ -22,6 +22,7 @@ const connection = mysql.createConnection({
 /* GET request for blob data. */
 router.get('/', (req, res, next) => {
   connection.connect();
+  // Select all rows from database and send as JSON
   connection.query('SELECT * FROM test', (error, results, fields) => {
     if (error) {
       throw error;
