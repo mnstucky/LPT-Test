@@ -43,7 +43,7 @@ document.addEventListener('readystatechange', async (event) => {
     await google.charts.load('current', { packages: ['corechart'] });
     const traceData = await getTraceData();
     let traceDataIndex = 0;
-    while (traceDataIndex < traceData.length) {
+    while (true) {
       processTraceData(traceData, traceDataIndex);
       if (traceDataIndex < traceData.length) {
         traceDataIndex += 1;
