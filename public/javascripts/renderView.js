@@ -19,8 +19,7 @@ function formatDataForGoogleCharts(traceData) {
   return formattedTraceData;
 }
 
-function drawCharts(formattedTraceData) {
-  console.log(formattedTraceData);
+function drawChart(formattedTraceData) {
   const dataToDraw = google.visualization.arrayToDataTable(formattedTraceData);
   const options = {
     title: 'Chart',
@@ -30,12 +29,28 @@ function drawCharts(formattedTraceData) {
   chart.draw(dataToDraw, options);
 }
 
+function processTraceData(traceData, traceDataIndex) {
+  const formattedTraceData = formatDataForGoogleCharts(traceData[traceDataIndex]);
+  drawChart(formattedTraceData);
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 document.addEventListener('readystatechange', async (event) => {
   if (event.target.readyState === 'complete') {
     await google.charts.load('current', { packages: ['corechart'] });
-    // google.charts.setOnLoadCallback(drawCharts);
     const traceData = await getTraceData();
-    const formattedTraceData = formatDataForGoogleCharts(traceData[0]);
-    drawCharts(formattedTraceData);
+    let traceDataIndex = 0;
+    while (traceDataIndex < traceData.length) {
+      processTraceData(traceData, traceDataIndex);
+      if (traceDataIndex < traceData.length) {
+        traceDataIndex += 1;
+      } else {
+        traceDataIndex = 0;
+      }
+      await sleep(1000);
+    }
   }
 });
