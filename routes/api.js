@@ -67,7 +67,6 @@ function parseTraceData(traceData) {
 
 /* GET request for blob data. */
 router.get('/', (req, res, next) => {
-  connection.connect();
   // Select all rows from database, process, and send as JSON
   connection.query('SELECT * FROM test', (error, results, fields) => {
     if (error) {
@@ -77,7 +76,6 @@ router.get('/', (req, res, next) => {
       res.send(JSON.stringify(formattedTraceData));
     }
   });
-  connection.end();
 });
 
 module.exports = router;
