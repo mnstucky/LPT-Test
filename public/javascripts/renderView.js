@@ -14,7 +14,7 @@ function formatDataForGoogleCharts(traceData) {
   let currentMHz = 850;
   for (const trace of traceData.powerLevels) {
     formattedTraceData.push([currentMHz, trace]);
-    currentMHz += (1 / 3);
+    currentMHz += (1 / 2);
   }
   return formattedTraceData;
 }
@@ -23,7 +23,27 @@ function drawChart(formattedTraceData) {
   const dataToDraw = google.visualization.arrayToDataTable(formattedTraceData);
   const options = {
     title: 'Chart',
-    legend: { position: 'bottom' },
+    vAxis: {
+      title: 'dBm',
+      titleTextStyle: {
+        italic: false,
+        bold: true,
+      },
+      maxValue: -30,
+      minValue: -130,
+      ticks: [-130, -120, -110, -100, -90, -80, -70, -60, -50, -40, -30],
+    },
+    hAxis: {
+      title: 'MHz',
+      titleTextStyle: {
+        italic: false,
+        bold: true,
+      },
+      ticks: [850, 1000, 1150],
+    },
+    legend: {
+      position: 'none',
+    },
   };
   const chart = new google.visualization.LineChart(document.getElementById('chart'));
   chart.draw(dataToDraw, options);
