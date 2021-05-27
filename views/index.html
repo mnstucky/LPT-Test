@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+    </script>
     <script src="/javascripts/renderView.js" type="module"></script>
-    <title>Title</title>
+    <title>Data Visualizer</title>
 </head>
 <body>
     <h1>Data Visualizer</h1>
