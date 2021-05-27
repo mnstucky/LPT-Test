@@ -5,6 +5,7 @@ async function getTraceData() {
     return traceData;
   } catch (error) {
     console.error(error);
+    return undefined;
   }
 }
 
@@ -19,10 +20,10 @@ function formatDataForGoogleCharts(traceData) {
   return formattedTraceData;
 }
 
-function drawChart(formattedTraceData) {
+function drawChart(formattedTraceData, timeStamp) {
   const dataToDraw = google.visualization.arrayToDataTable(formattedTraceData);
   const options = {
-    title: 'Chart',
+    title: timeStamp,
     vAxis: {
       title: 'dBm',
       titleTextStyle: {
@@ -39,7 +40,6 @@ function drawChart(formattedTraceData) {
         italic: false,
         bold: true,
       },
-      ticks: [850, 1000, 1150],
     },
     legend: {
       position: 'none',
@@ -49,28 +49,32 @@ function drawChart(formattedTraceData) {
   chart.draw(dataToDraw, options);
 }
 
-function processTraceData(traceData, traceDataIndex) {
-  const formattedTraceData = formatDataForGoogleCharts(traceData[traceDataIndex]);
-  drawChart(formattedTraceData);
-}
-
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function startAnimation(traceData, traceDataIndex) {
+  while (true) {
+    const formattedTraceData = formatDataForGoogleCharts(traceData[traceDataIndex]);
+    drawChart(formattedTraceData, traceData[traceDataIndex].time);
+    if (traceDataIndex < traceData.length - 1) {
+      traceDataIndex += 1;
+    } else {
+      traceDataIndex = 0;
+    }
+    await sleep(1000);
+  }
 }
 
 document.addEventListener('readystatechange', async (event) => {
   if (event.target.readyState === 'complete') {
     await google.charts.load('current', { packages: ['corechart'] });
     const traceData = await getTraceData();
-    let traceDataIndex = 0;
-    while (true) {
-      processTraceData(traceData, traceDataIndex);
-      if (traceDataIndex < traceData.length) {
-        traceDataIndex += 1;
-      } else {
-        traceDataIndex = 0;
-      }
-      await sleep(1000);
+    if (traceData) {
+      startAnimation(traceData, 0);
+    } else {
+      const chartContainer = document.getElementById('chart');
+      chartContainer.textContent = 'Sorry, something went wrong.';
     }
   }
 });

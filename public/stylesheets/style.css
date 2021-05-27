@@ -1,6 +1,26 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  border: none;
+  background-color: hsl(217, 90%, 61%);
+  border-radius: .5rem;
+  height: 35px;
+  margin-left: 1rem;
+  color: hsl(0, 0%, 100%);
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+button:hover {
+  background-color: hsl(217, 90%, 67%);
 }
 
 a {
