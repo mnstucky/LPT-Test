@@ -73,7 +73,7 @@ router.get('/', (req, res, next) => {
       throw error;
     } else {
       const formattedTraceData = parseTraceData(results);
-      res.send(JSON.stringify(formattedTraceData));
+      res.json(formattedTraceData);
     }
   });
 });

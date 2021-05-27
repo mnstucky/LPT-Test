@@ -19,6 +19,7 @@ async function getTraceData() {
   try {
     const rawTraceData = await fetch('./api/');
     const traceData = await rawTraceData.json();
+    console.log(traceData);
     return traceData;
   } catch (error) {
     console.error(error);
