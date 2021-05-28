@@ -23,6 +23,7 @@
    }
    ```
 4. Setup your database connection by setting the required parameters directly in **api.js**. See the *Setup MySQL connection* section of api.js. For more information, see the [mysql npm documention](https://www.npmjs.com/package/mysql).
-5. Again from the parent directory of your cloned repository, run `npm run start` to start the server, and then navigate in a browser to http://localhost:3000. 
-6. To view unit/integration test results, run `npm run test`.
-7. To run a development server that will refresh if your source code changes, run `npm run dev`.
+5. Connect to the internet. You must be online for the chart library, Google Charts, to load.
+6. Again from the parent directory of your cloned repository, run `npm run start` to start the server, and then navigate in a browser to http://localhost:3000. 
+7. To view unit/integration test results, run `npm run test`.
+8. To run a development server that will refresh if your source code changes, run `npm run dev`.
