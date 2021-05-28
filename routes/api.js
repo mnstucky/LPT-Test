@@ -30,7 +30,7 @@ const router = express.Router();
 /* Setup MySQL connection */
 const mysql = require('mysql');
 
-const connection = mysql.createConnection(process.env.JAWSDB_URL || {
+const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
