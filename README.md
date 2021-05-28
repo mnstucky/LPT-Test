@@ -1,4 +1,4 @@
-#Quick Start Guide
+# Quick Start Guide
 1. Install the latest Node LTS version (14.17.0 LTS).
 2. Clone this repository.
 3. Run `npm install` from the parent directory of your cloned repository. This command will install the following dependencies:
