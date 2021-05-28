@@ -30,13 +30,15 @@ const router = express.Router();
 /* Setup MySQL connection */
 const mysql = require('mysql');
 
-const connection = mysql.createConnection({
-  host: process.env.LPT_DB_HOST || 'localhost',
-  user: process.env.LPT_DB_USERNAME || 'root',
-  password: process.env.LPT_DB_PASSWORD || '',
-  database: process.env.LPT_DB_DATABASE || 'lpt',
+const connection = mysql.createConnection(process.env.JAWSDB_URL || {
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'lpt',
   port: '3306',
 });
+
+connection.connect();
 
 // Form of data from DB is array of objects:
 //  RowDataPacket {
