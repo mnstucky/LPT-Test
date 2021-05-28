@@ -31,10 +31,10 @@ const router = express.Router();
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-  host: process.env.MYSQL_HOST || 'localhost',
-  user: process.env.MYSQL_USER || 'root',
-  password: process.env.MYSQL_PASSWORD || '',
-  database: process.env.MYSQL_DATABASE || 'lpt',
+  host: process.env.LPT_DB_HOST || 'localhost',
+  user: process.env.LPT_DB_USERNAME || 'root',
+  password: process.env.LPT_DB_PASSWORD || '',
+  database: process.env.LPT_DB_DATABASE || 'lpt',
   port: '3306',
 });
 
