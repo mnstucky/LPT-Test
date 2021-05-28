@@ -5,8 +5,10 @@ let isPaused = false;
 //  traceDataIndex tracks which trace the application is currently displaying
 let traceDataIndex = 0;
 
+// Declare functions
+
 // getTraceData calls the application's API
-// The data returned by API is an array of these objects:
+// The data returned by the API is an array of these objects:
 // {
 //   id: 50,
 //       powerLevels: [
@@ -108,6 +110,7 @@ function handlePauseButton(event, traceData) {
 }
 
 // Call functions and declare event listeners to start the application
+
 document.addEventListener('readystatechange', async (event) => {
   if (event.target.readyState === 'complete') {
     // eslint-disable-next-line no-undef
@@ -119,9 +122,14 @@ document.addEventListener('readystatechange', async (event) => {
     });
     if (traceData) {
       startAnimation(traceData, 0);
+      // Display an error if there is no traceData
     } else {
       const chartContainer = document.getElementById('chart');
       chartContainer.textContent = 'Sorry, something went wrong.';
     }
   }
 });
+
+exports.getTraceData = getTraceData;
+exports.formatDataForGoogleCharts = formatDataForGoogleCharts;
+exports.drawChart = drawChart;
