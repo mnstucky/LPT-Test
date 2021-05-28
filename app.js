@@ -1,3 +1,6 @@
+// Time spent on required functionality: 3.5 hours
+// Time spent on unit tests, additional functionality, and documentation: 2 hours
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
